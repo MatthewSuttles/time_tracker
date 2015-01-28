@@ -1,0 +1,16 @@
+<h1>Users</h1>
+
+<table>
+  <th>Email</th>
+  <th>First Name</th>
+    <th>Last Name</th>
+  <th>Admin?</th>
+  <%@users.each do |user|%>
+  <tr>
+     <td> <%= user.first_name %> </td>
+     <td> <%= user.last_name %> </td>
+     <td> <%= user.email %></td>
+     <td><%= user.admin? ? "yes" : "no" %>
+  </tr>
+    <%end%>
+  </table>
