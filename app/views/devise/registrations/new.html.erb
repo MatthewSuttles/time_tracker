@@ -8,6 +8,14 @@
     <%= f.email_field :email, autofocus: true %>
   </div>
 
+    <div>
+      <%= f.label :first_name %>
+      <%=	f.text_field :first_name  %>
+    </div>
+    <div>
+      <%= f.label :last_name %>
+      <%=	f.text_field :last_name  %>
+    </div>
   <div class="field">
     <%= f.label :password %>
     <% if @validatable %>
@@ -20,6 +28,10 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
+    <div>
+      <%= f.label :admin %>
+      <%=	f.check_box :admin  %>
+    </div>
 
   <div class="actions">
     <%= f.submit "Sign up" %>
