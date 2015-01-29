@@ -5,6 +5,7 @@
   <th>Last Name</th>
   <th>Email</th>
   <th>Admin?</th>
+  <th></th>
 
   <%@users.each do |user|%>
   <tr>
@@ -12,6 +13,7 @@
      <td> <%= user.last_name %> </td>
      <td> <%= user.email %></td>
      <td><%= user.admin? ? "yes" : "no" %>
+       <td> <%=link_to "edit", edit_user_registration_path(user.id) %></td>
   </tr>
     <%end%>
 

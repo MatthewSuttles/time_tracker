@@ -3,11 +3,14 @@
 <table>
   <th>Name</th>
   <th>Active</th>
+  <th></th>
 
   <%@teams.each do |team|%>
       <tr>
         <td> <%= team.name  %> </td>
         <td><%= team.active ? "yes" : "no" %>
+        <td> <%=link_to "edit", edit_team_path(team.id) %></td>
+
       </tr>
   <%end%>
 

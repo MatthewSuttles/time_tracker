@@ -18,6 +18,7 @@ class TeamsController < ApplicationController
 
   def edit
   @team = Team.find(params[:id])
+    @team_users = @team.users.active
   end
 
   def update
