@@ -3,10 +3,13 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  
+
+  has_many :teams, :through => :memberships
+  has_many :memberships
   
   
   validates_presence_of :email
+  validates_uniqueness_of :email
   validates_presence_of :first_name
   validates_presence_of :last_name
   
@@ -16,5 +19,9 @@ class User < ActiveRecord::Base
   
   def admin?
     return self.admin
+  end
+
+  def self.active
+    self.where(active: true)
   end
 end

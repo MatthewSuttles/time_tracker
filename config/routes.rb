@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   root 'users#index'
   devise_for :users, controllers: {registrations: "registrations"}, path_names: {sign_in: "login", sign_out: "logout"}
+  resources :teams
+  get "/users" => 'users#index'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -54,4 +56,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
 end

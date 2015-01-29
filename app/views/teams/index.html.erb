@@ -1,0 +1,14 @@
+<h1>Teams</h1>
+
+<table>
+  <th>Name</th>
+  <th>Active</th>
+
+  <%@teams.each do |team|%>
+      <tr>
+        <td> <%= team.name  %> </td>
+        <td><%= team.active ? "yes" : "no" %>
+      </tr>
+  <%end%>
+
+</table>

@@ -11,7 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150128164220) do
+ActiveRecord::Schema.define(version: 20150129171042) do
+
+  create_table "memberships", force: :cascade do |t|
+    t.integer  "team_id"
+    t.integer  "user_id"
+    t.boolean  "active",     default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "memberships", ["team_id"], name: "index_memberships_on_team_id"
+  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id"
+
+  create_table "teams", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "active",     default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -29,6 +47,7 @@ ActiveRecord::Schema.define(version: 20150128164220) do
     t.boolean  "admin",                  default: false
     t.string   "first_name"
     t.string   "last_name"
+    t.boolean  "active",                 default: true
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
