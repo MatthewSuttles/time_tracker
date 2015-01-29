@@ -14,7 +14,19 @@ class RegistrationsController < Devise::RegistrationsController
       render "edit"
     end
   end
-    
+
+
+  #these are to add a user with out signing up.
+  def new_user
+    @user = User.new
+  end
+
+  def add_user
+    create_user
+  end
+  #################################################
+
+
   private
   def can_update?
       # if email is blank return false
@@ -31,11 +43,23 @@ class RegistrationsController < Devise::RegistrationsController
   def user_params
     params[:user].permit(:email, :password, :password_confirmation, :admin, :first_name, :last_name)
   end
+
+  def create_user
+    build_resource(user_params)
+    if resource.save
+     redirect_to users_path
+   else
+      flash[:error] = "failed"
+      redirect_to users_path
+   end
+
+  end
   
   protected
   def update_resource(resource, params)
     resource.update_without_password(params)
   end
+
 
   
 end

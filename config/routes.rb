@@ -8,6 +8,16 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {registrations: "registrations"}, path_names: {sign_in: "login", sign_out: "logout"}
   resources :teams
   get "/users" => 'users#index'
+
+  devise_scope :user do
+    get "/users/logout" => "devise/sessions#destroy"
+    get "/new_user" => "registrations#new_user"
+    post "/add_user" => "registrations#add_user"
+  end
+
+
+
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

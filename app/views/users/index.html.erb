@@ -1,5 +1,9 @@
 <h1>Users</h1>
 
+<%	 if current_user.admin? %>
+<p> <%=link_to"Add New User",  "/new_user"%></p>
+    <%end%>
+
 <table>
   <th>First Name</th>
   <th>Last Name</th>
