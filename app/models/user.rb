@@ -24,4 +24,7 @@ class User < ActiveRecord::Base
   def self.active
     self.where(active: true)
   end
+  def self.inactive
+    self.where(active: false)
+  end
 end

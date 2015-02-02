@@ -18,7 +18,8 @@ class TeamsController < ApplicationController
 
   def edit
   @team = Team.find(params[:id])
-    @team_users = @team.users.active
+  @team_users = @team.active_users
+    @users = User.all.active
   end
 
   def update
@@ -28,6 +29,35 @@ class TeamsController < ApplicationController
     redirect_to edit_team_path(@team)
   end
 
+  def ajax_add_user
+    @team = Team.find(params[:team])
+    @user = User.find(params[:user])
+
+    @team.users << @user
+
+    #if the user is inactive with the team then make them active
+    temp = @team.memberships.where(user_id: params[:user])
+    temp[0].active = true
+    temp[0].save
+
+    @team_users = @team.active_users
+    render "teams/_team_users_table"
+
+
+  end
+  def ajax_remove_user
+    @team = Team.find(params[:team])
+    @user = User.find(params[:user])
+
+    temp = @team.memberships.where(user_id: params[:user])
+    temp[0].active = false
+    temp[0].save
+
+    @team_users = @team.active_users
+    respond_to do |wants|
+    wants.html (render inline: "team_users_table")
+    end
+  end
 private
   def team_params
     params[:team].permit(:name, :active)

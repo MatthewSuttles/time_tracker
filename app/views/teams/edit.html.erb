@@ -1,4 +1,9 @@
 <h1>Edit Team <%= @team.name%></h1>
-<%= render "team_form" %>
 
-<%= render "team_users_table" %>
+<%= form_for @team do |f| %>
+<%= render "team_form", f: f%>
+<%= render "teams/add_user", f: f%>
+<%= render "team_users_table", f:  f %>
+
+    <div class = "hidden" id="team_id" data-value="<%=  @team.id%>"></div>
+<%	 end %>

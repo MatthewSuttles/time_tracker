@@ -9,4 +9,14 @@ class Team < ActiveRecord::Base
   def self.active
     self.where(active: true)
   end
+
+  def active_users
+    temp = self.memberships.where(active: true)
+    users = []
+    temp.each do |user|
+      temp_user = User.find(user.user_id)
+      users << temp_user if temp_user.active
+    end
+    return users
+  end
 end

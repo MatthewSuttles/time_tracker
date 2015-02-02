@@ -1,0 +1,7 @@
+<hr>
+<h2> Users for Team <%= @team.name%></h2>
+
+<p>
+  <%=f.label "Add User" %>
+  <%=f.collection_select :user_ids, @users, :id, :full_name, {selected: "", include_blank: true}   %>
+</p>
