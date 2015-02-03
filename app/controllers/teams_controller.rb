@@ -33,18 +33,21 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:team])
     @user = User.find(params[:user])
 
-    @team.users << @user
-
-    #if the user is inactive with the team then make them active
-    temp = @team.memberships.where(user_id: params[:user])
-    temp[0].active = true
-    temp[0].save
+    if @team.users.exists?(params[:user])
+      #if the user is inactive with the team then make them active
+      temp = @team.memberships.where(user_id: params[:user])
+      temp[0].active = true
+      temp[0].save
+    else
+      @team.users << @user
+    end
 
     @team_users = @team.active_users
-    render "teams/_team_users_table"
-
-
+    respond_to do |wants|
+      wants.json{render json: @user.as_json}
+    end
   end
+
   def ajax_remove_user
     @team = Team.find(params[:team])
     @user = User.find(params[:user])
@@ -55,7 +58,7 @@ class TeamsController < ApplicationController
 
     @team_users = @team.active_users
     respond_to do |wants|
-    wants.html (render inline: "team_users_table")
+      wants.json {render json: @user.as_json}
     end
   end
 private
