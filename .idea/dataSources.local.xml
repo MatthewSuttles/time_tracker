@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails time_tracker: development" uuid="fc04b5e6-a920-446e-9c7f-60e1966664ce">
+      <secret-storage>memory</secret-storage>
+    </data-source>
+  </component>
+</project>

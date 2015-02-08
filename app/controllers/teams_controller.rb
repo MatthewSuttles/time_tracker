@@ -33,18 +33,25 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:team])
     @user = User.find(params[:user])
 
+    #need to check and see if the user was part of that team already
     if @team.users.exists?(params[:user])
+
       #if the user is inactive with the team then make them active
       temp = @team.memberships.where(user_id: params[:user])
-      temp[0].active = true
-      temp[0].save
+      if temp[0].active == true
+        raise "user is already added"
+      else
+        temp[0].active = true
+        temp[0].save
+      end
+      #else create spot for them
     else
       @team.users << @user
     end
 
-    @team_users = @team.active_users
     respond_to do |wants|
-      wants.json{render json: @user.as_json}
+      wants.html {render :partial => "teams/user_row", locals: {user: @user}}
+
     end
   end
 
@@ -54,11 +61,16 @@ class TeamsController < ApplicationController
 
     temp = @team.memberships.where(user_id: params[:user])
     temp[0].active = false
-    temp[0].save
+    if temp[0].save
 
-    @team_users = @team.active_users
-    respond_to do |wants|
-      wants.json {render json: @user.as_json}
+      respond_to do |wants|
+        wants.json {render json:true}
+      end
+
+    else
+      respond_to do |wants|
+        wants.json {render json: false}
+      end
     end
   end
 private
