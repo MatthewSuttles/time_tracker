@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -9,6 +11,7 @@ Rails.application.routes.draw do
   post "/teams/add_user" => "teams#ajax_add_user"
   get "/teams/remove_user" => "teams#ajax_remove_user"
   resources :teams
+  resources :categories
   get "/users" => 'users#index'
 
   devise_scope :user do

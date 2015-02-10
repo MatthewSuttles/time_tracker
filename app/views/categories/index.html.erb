@@ -1,0 +1,16 @@
+<h1>Categories</h1>
+
+<table>
+  <th>Name</th>
+  <th>Description</th>
+  <th></th>
+
+  <%@categories.each do |category|%>
+      <tr>
+        <td> <%= category.name  %> </td>
+        <td><%= category.description%>
+        <td> <%=link_to "edit", edit_category_url(category.id) %></td>
+      </tr>
+  <%end%>
+
+</table>
