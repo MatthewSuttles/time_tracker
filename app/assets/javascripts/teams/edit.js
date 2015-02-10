@@ -3,33 +3,23 @@
  */
 $(document).ready(function(){
     var $team_users = $("#team_user_ids")
-    var $remove_user = $(".delete_user")
-    var $td = $('<td>')
-    var $tr = $('<tr>')
 
     $team_users.change(function(){
        //check to make sure it is not blank
         if ($team_users.val() != ""){
-            console.log("true")
             $.ajax({
                 url: "/teams/add_user",
                 type: "POST",
-                dataType: "JSON",
+                dataType: "HTML",
                 data: {user: $team_users.val(),
                 team: $('#team_id').data("value")},
                 success: function(response){
-                    json_response = $.parseJSON()
-                    console.log(json_response)
-                    $team_users.append(
-                        $tr.append(
-                            $td.text(response.first_name),
-                            $td.text(response.last_name),
-                            $td.text(response.email),
-                            $td.text(response.admin),
-                            $td.append("<a href='/users/edit.1'>edit</a> '/' <a class='delete_user' href=''>delete</a>")
-                        )
+                    $('#team_users_table tr:last').after(response);
+                    $('#table_message').html("User Successfully Added");
 
-                    );
+                },
+                error:function(response){
+                    $('#table_message').html("This User Is Already A Part Of This Team")
                 }
             })
         }
@@ -39,11 +29,11 @@ $(document).ready(function(){
      });
 
 
-
-    $remove_user.on("click", function(e){
+//delegate body to be click event for dynamically added rows.
+    $('body').on("click", '.delete_user', function(e){
         e.preventDefault();
         var user = $(this).parents("tr").data("id")
-        var tr = $(this).parents('tr')
+        var tr = $(this).parents("tr")
         $.ajax({
             url: "/teams/remove_user",
             type: "GET",
@@ -52,7 +42,12 @@ $(document).ready(function(){
                 team: $('#team_id').data("value")
                 },
             success: function(response){
+                $('#table_message').html("User Successfully Removed");
                 tr.remove();
+
+            },
+            error:function(response){
+                $('#table_message').html("Error Removing User")
             }
 
         });
