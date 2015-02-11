@@ -1,7 +1,7 @@
 <%= form_for @time_log do |f|%>
     <p class ="field">
         <%= f.label :team_id%>
-        <%= f.select :team_id, @teams.collect{|t| [t.name, t.id]}%>
+        <%= f.select :team_id, @user_teams.collect{|t| [t.name, t.id]}%>
     </p>
 
     <p class ="field">
@@ -23,6 +23,6 @@
         <%= f.label :minutes%>
         <%= f.text_field :minutes%>
     </p>
-
+    <input type="button" id="submit_time_log" value="Submit">
 
 <%end%>

@@ -1,10 +1,33 @@
 <%#= javascript_include_tag "time_logs/foundation-datepicker"%>
 <%#=stylesheet_link_tag "foundation-datepicker"%>
+<div id="modal">
+  <%= render "time_logs/time_log_form" %>
+</div>
+
+<div id="mask"></div>
 
 <h1>TimeLogs for <%= @current_user.full_name%></h1>
 <a href="#" id="show_modal">Add New Time Log</a>
 
-<div id="modal">
-<%= render "time_logs/time_log_form" %>
+<div>
+    <% @user_teams.each do |team|%>
+    <table>
+      <thead><h3><%= team.name %></h3></thead>
+      <th>Category</th>
+      <th>Subcategory</th>
+      <th>Time</th>
+      <th>Description</th>
 
+      <%team.time_logs.each do |log|%>
+          <tr>
+          <td><%= log.subcategory.category%></td>
+            <td><%= log.subcategory%></td>
+            <td><%= log.hours%></td>
+            <td><%= log.description%></td>
+          </tr>
+      <%end%>
+    </table>
+    <hr/>
+    <%end%>
 </div>
+

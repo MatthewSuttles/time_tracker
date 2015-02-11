@@ -6,6 +6,7 @@ $(document).ready(function(){
     $('#show_modal').on('click', function(event) {
         event.preventDefault();
         $('#modal').fadeIn(800);
+        $('#mask').fadeIn(800);
     });
 
     $('.datepicker').datepicker();
