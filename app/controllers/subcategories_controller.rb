@@ -19,11 +19,11 @@ class SubcategoriesController < ApplicationController
   end
 
   def update
-    @subcategory = Subcategory.update_attributes(subcategory_params)
+    @subcategory = Subcategory.find(params[:id])
 
-    if @subcategory.save
+    if @subcategory.update_attributes(subcategory_params)
       flash[:notice] = "Subcategory Saved"
-      redirect_to edit_subcategories_url(@subcategory)
+      redirect_to edit_subcategory_url(@subcategory)
     else
       render :edit
     end

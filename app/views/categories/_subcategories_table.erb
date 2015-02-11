@@ -1,0 +1,22 @@
+<div >
+
+  <table id="subcategorys_table">
+    <th>Name</th>
+    <th>Description</th>
+    <th>Active</th>
+    <th></th>
+    
+
+    <%@subcategories.each do |subcategory|%>
+        <tr data-id="<%= subcategory.id %>">
+
+          <td> <%= subcategory.name %> </td>
+          <td> <%= subcategory.description %> </td>
+          <td> <%= subcategory.active? ? "yes" : "no" %></td>
+          <td> <%=link_to "edit", edit_subcategory_url(subcategory.id) %>   /  <%= link_to "delete", "#", class: "delete_subcategory" %></td>
+
+        </tr>
+    <%end%>
+
+  </table>
+</div>

@@ -10,6 +10,11 @@ class Subcategory < ActiveRecord::Base
     return self.active
   end
 
-
+  def self.active
+    self.where(active: true)
+  end
+  def self.inactive
+    self.where(active: false)
+  end
 
 end

@@ -5,6 +5,7 @@ class CategoriesController < ApplicationController
 
   def edit
     @category = Category.find(params[:id])
+    @subcategories = @category.subcategories
 
   end
 
