@@ -1,0 +1,24 @@
+<%= form_for @subcategory do |f| %>
+
+    <p class="field">
+        <%= f.label :name%>
+        <%= f.text_field :name%>
+    </p>
+
+    <p class="field">
+        <%= f.label :description %>
+        <%= f.text_area :description%>
+    </p>
+
+    <p class="field">
+        <%= f.label :category_id, "Category"%>
+        <%= f.collection_select :category_id, Category.all, :id, :name, {:prompt => 'Please select category'}  %>
+    </p>
+
+    <p class="field">
+        <%= f.label :active%>
+        <%= f.check_box :active%>
+    </p>
+        <%= f.submit "Save"%>
+
+<% end %>
