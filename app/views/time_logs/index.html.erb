@@ -1,0 +1,10 @@
+<%#= javascript_include_tag "time_logs/foundation-datepicker"%>
+<%#=stylesheet_link_tag "foundation-datepicker"%>
+
+<h1>TimeLogs for <%= @current_user.full_name%></h1>
+<a href="#" id="show_modal">Add New Time Log</a>
+
+<div id="modal">
+<%= render "time_logs/time_log_form" %>
+
+</div>

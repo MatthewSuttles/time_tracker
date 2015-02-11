@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :teams, :through => :memberships
   has_many :memberships
-  
+  has_many :time_logs
   
   validates_presence_of :email
   validates_uniqueness_of :email

@@ -1,6 +1,7 @@
 class Team < ActiveRecord::Base
   has_many :users, :through => :memberships
   has_many :memberships
+  has_many :time_logs
 
   validates_uniqueness_of :name
   validates_presence_of :name

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  get 'time_logs/index'
+
   get 'subcategories/index'
 
   get 'subcategories/new'
@@ -19,6 +21,7 @@ Rails.application.routes.draw do
   resources :teams
   resources :categories
   resources :subcategories
+  resources :time_logs
   get "/users" => 'users#index'
 
   devise_scope :user do
