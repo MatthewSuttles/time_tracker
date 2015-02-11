@@ -19,7 +19,7 @@
       <th>Time</th>
       <th>Description</th>
 
-      <%team.time_logs.each do |log|%>
+      <%team.users.find(@current_user.id).time_logs.each do |log|%>
           <tr>
             <td><%= log.date%></td>
             <td><%= log.subcategory.category%></td>
