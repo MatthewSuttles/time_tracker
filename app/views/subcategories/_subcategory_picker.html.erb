@@ -1,0 +1,4 @@
+<p class ="field" id="subcategories">
+  <%= label_tag "Subcategory" %>
+  <%= select :time_log , :subcategory_id, @subcategories.collect{|s| [s.name, s.id] }%>
+</p>

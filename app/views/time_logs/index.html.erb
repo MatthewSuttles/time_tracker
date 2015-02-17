@@ -9,27 +9,5 @@
 <h1>TimeLogs for <%= @current_user.full_name%></h1>
 <a href="#" id="show_modal">Add New Time Log</a>
 
-<div>
-    <% @user_teams.each do |team|%>
-    <table>
-      <thead><h3><%= team.name %></h3></thead>
-      <th>Date</th>
-      <th>Category</th>
-      <th>Subcategory</th>
-      <th>Time</th>
-      <th>Description</th>
-
-      <%team.users.find(@current_user.id).time_logs.each do |log|%>
-          <tr>
-            <td><%= log.date%></td>
-            <td><%= log.subcategory.category%></td>
-            <td><%= log.subcategory%></td>
-            <td><%= log.hours%></td>
-            <td><%= log.description%></td>
-          </tr>
-      <%end%>
-    </table>
-    <hr/>
-    <%end%>
-</div>
+<%= render "time_logs/team_table" %>
 

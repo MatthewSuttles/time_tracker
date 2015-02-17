@@ -3,12 +3,70 @@
  */
 
 $(document).ready(function(){
+    $('.datepicker').datepicker();
+
+
+
+    //-------showing and hiding modal
     $('#show_modal').on('click', function(event) {
         event.preventDefault();
         $('#modal').fadeIn(800);
         $('#mask').fadeIn(800);
     });
 
-    $('.datepicker').datepicker();
+    $('#cancel_time_log').on('click', function(event){
+       event.preventDefault();
+        $('#modal').fadeOut(800);
+        $('#mask').fadeOut(800);
+    });
+
+
+
+    //---------Ajax Subcategories-----------------
+    $('#post_category_id').change(function(){
+        if($('#post_category_id').val() != ""){
+            $('#subcategories').html("");
+            $.ajax({
+                url:"/time_logs/ajax_subcategories",
+                type: "GET",
+                dataType: "HTML",
+                data: {category_id: $('#post_category_id').val()},
+                success: function(response){
+                    $('#subcategories').html(response);
+                }
+            });
+        }
+    });
+
+    //----------Submit The Time Log-----------------------
+    $('body').on('click','#submit_time_log', function(e){
+        var teamID = $('#time_log_team_id').val(),
+        subcategoryID = $('#time_log_subcategory_id').val(),
+        date = $('#time_log_date').val(),
+        hours = $('#time_log_hours').val(),
+        minutes = $('#time_log_minutes').val();
+
+        e.preventDefault()
+
+        $.ajax({
+            url:"/time_logs/create",
+            type:"POST",
+            dataType:"HTML",
+            data: {time_log: {
+                              team_id: teamID,
+                              subcategory_id: subcategoryID,
+                              date: date,
+                              hours: hours,
+                              minutes: minutes
+                              }
+            },
+            success: function(response){
+                $('#modal').fadeOut(800);
+                $('#mask').fadeOut(800);
+               $('#team_tables').html(response)
+            }
+        })
+
+    })
 
 });

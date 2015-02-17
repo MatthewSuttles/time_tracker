@@ -6,7 +6,9 @@
 
     <p class ="field">
         <%= f.label "Category" %>
-        <%= select :post, :category_id, @categories%>
+        <%= select :post, :category_id, @categories , {include_blank: true}%>
+    </p>
+    <p class="field" id="subcategories">
     </p>
 
     <p class ="field">
@@ -24,5 +26,6 @@
         <%= f.text_field :minutes%>
     </p>
     <input type="button" id="submit_time_log" value="Submit">
+    <input type="button" id="cancel_time_log" value="Cancel">
 
 <%end%>

@@ -11,4 +11,8 @@ class TimeLog < ActiveRecord::Base
   belongs_to :subcategory
 
 
+  def full_time
+    return "#{self.hours}h - #{self.minutes}m"
+  end
+
 end

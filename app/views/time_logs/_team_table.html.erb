@@ -1,0 +1,23 @@
+<div id="team_tables">
+  <% @user_teams.each do |team|%>
+      <table>
+        <thead><h3><%= team.name %></h3></thead>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Subcategory</th>
+        <th>Time</th>
+        <th>Description</th>
+
+        <%team.recent_user_logs(@current_user).each do |log|%>
+            <tr>
+              <td><%= log.date.strftime("%m/%d/%Y")%></td>
+              <td><%= log.subcategory.category.name%></td>
+              <td><%= log.subcategory.name%></td>
+              <td><%= log.full_time%></td>
+              <td><%= log.description%></td>
+            </tr>
+        <%end%>
+      </table>
+      <hr/>
+  <%end%>
+</div>

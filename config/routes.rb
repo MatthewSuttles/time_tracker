@@ -1,27 +1,19 @@
 Rails.application.routes.draw do
-
-
-  get 'time_logs/index'
-
-  get 'subcategories/index'
-
-  get 'subcategories/new'
-
-  get 'subcategories/edit'
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  root 'users#index'
+  root 'time_logs#index'
   devise_for :users, controllers: {registrations: "registrations"}, path_names: {sign_in: "login", sign_out: "logout"}
   post "/teams/add_user" => "teams#ajax_add_user"
   get "/teams/remove_user" => "teams#ajax_remove_user"
+  get "/time_logs/ajax_subcategories" => "time_logs#ajax_subcategories"
   resources :teams
   resources :categories
   resources :subcategories
-  resources :time_logs
+  get "/time_logs" => 'time_logs#index'
+  post "/time_logs/create" => 'time_logs#create'
   get "/users" => 'users#index'
 
   devise_scope :user do
