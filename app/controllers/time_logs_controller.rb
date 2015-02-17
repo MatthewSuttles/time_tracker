@@ -2,9 +2,7 @@ class TimeLogsController < ApplicationController
   def index
    time_log_setup
   end
-  def new
 
-  end
   def create
     params[:time_log][:date] = Date.strptime(params[:time_log][:date], "%m/%d/%Y")
     @time_log = TimeLog.new(time_log_params)
@@ -13,7 +11,7 @@ class TimeLogsController < ApplicationController
       time_log_setup
       render partial: "time_logs/team_table"
     else
-      render text: "failure"
+      render status: 400
     end
 
   end
@@ -37,7 +35,5 @@ class TimeLogsController < ApplicationController
     @categories = Category.all.collect{|c| [c.name, c.id] }
   end
 
-  def correct_time
 
-  end
 end
