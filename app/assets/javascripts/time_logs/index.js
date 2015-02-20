@@ -20,6 +20,7 @@ $(document).ready(function(){
        event.preventDefault();
         $('#modal').fadeOut(800);
         $('#mask').fadeOut(800);
+        clearValues();
     });
 
 
@@ -27,7 +28,7 @@ $(document).ready(function(){
     //---------Ajax Subcategories-----------------
     $('#post_category_id').change(function(){
         if($('#post_category_id').val() != ""){
-            $('#subcategories').html("");
+
             $.ajax({
                 url:"/time_logs/ajax_subcategories",
                 type: "GET",
@@ -37,6 +38,9 @@ $(document).ready(function(){
                     $('#subcategories').html(response);
                 }
             });
+        }
+        else {
+            $('#subcategories').html("");
         }
     });
 
@@ -62,6 +66,7 @@ $(document).ready(function(){
                    $('#modal').fadeOut(800);
                    $('#mask').fadeOut(800);
                    $('#team_tables').html(response)
+                   clearValues();
                }
            })
        }
@@ -88,7 +93,14 @@ $(document).ready(function(){
         else {
             return true
         }
+    }
 
+    var clearValues = function(){
+        $('#time_log_team_id').val(""),
+        $('#time_log_subcategory_id').val(""),
+        $('#time_log_date').val(""),
+        $('#time_log_hours').val(""),
+        $('#time_log_minutes').val("");
     }
 
 });

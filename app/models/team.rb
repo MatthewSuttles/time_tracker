@@ -20,7 +20,7 @@ class Team < ActiveRecord::Base
     end
     return users
   end
-
+#TODO possibly make days user configurable.
   def recent_user_logs(user)
     self.time_logs.where({user: user, date: (Time.now-5.days)..Time.now})
   end
